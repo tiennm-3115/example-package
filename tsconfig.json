@@ -1,24 +1,20 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    /* Base Options: */
+    "esModuleInterop": true,
     "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "node",
+    "target": "es2022",
+    "allowJs": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
+    "moduleDetection": "force",
+    /* Strictness */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
-    "types": ["node"]
+    "noUncheckedIndexedAccess": true,
+    /* If NOT transpiling with TypeScript: */
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "noEmit": true,
+    /* If your code runs in the DOM: */
+    "lib": ["es2022", "dom", "dom.iterable"]
   }
 }
