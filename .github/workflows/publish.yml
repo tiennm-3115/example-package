@@ -27,4 +27,4 @@ jobs:
         with:
           publish: npm run release
         env:
-          PACKAGE_NAME_SECRET: ${{ secrets.PACKAGE_NAME_SECRET }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
