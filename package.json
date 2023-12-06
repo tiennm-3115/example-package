@@ -1,16 +1,16 @@
 {
-  "name": "example-package",
+  "name": "@tiennm-3115/example-package",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@tiennm-3115"
+    "@tiennm-3115:registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "build": "tsup index.ts --format cjs,esm --dts",
-    "release": "pnpm run build && changeset publish",
+    "release": "npm run build && changeset publish",
     "lint": "tsc"
   },
   "devDependencies": {
