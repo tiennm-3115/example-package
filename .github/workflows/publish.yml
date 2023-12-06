@@ -24,8 +24,6 @@ jobs:
       - name: Install dependencies and build 🔧
         run: npm install && npm run build
       - name: Publish package to NPM 📦
-        run: |
-          echo ${{ secrets.TOKEN_GITHUB }}
-          npm publish --access public
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
