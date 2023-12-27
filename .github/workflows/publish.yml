@@ -22,7 +22,7 @@ jobs:
       - name: Check if package version has been updated
         id: check-version
         run: |
-          git fetch
+          git fetch origin develop --verbose
           VERSION_CHANGED=$(git diff --name-only origin/develop..HEAD | grep 'package.json')
           if [ "$VERSION_CHANGED" != "" ]; then
             echo "::set-output name=version_updated::true"
