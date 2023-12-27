@@ -19,8 +19,9 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - name: Check if version in package.json has been updated
         run: |
+          set -x
           git fetch
-          VERSION_CHANGED=$(git diff origin/develop^ origin/develop -- package.json | grep '"version":')
+          VERSION_CHANGED=$(git diff origin/develop^ origin/develop -- package.json | grep '"version":' || true)
           if [ -z "$VERSION_CHANGED" ]; then
             echo "Version in package.json has not been updated."
             exit 1
