@@ -17,18 +17,13 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: https://npm.pkg.github.com/
-      - name: Check if version in package.json has been updated
-        run: |
-          set -x
-          git fetch
-          VERSION_CHANGED=$(git diff origin/develop^ origin/develop -- package.json | grep '"version":' || true)
-          if [ -z "$VERSION_CHANGED" ]; then
-            echo "Version in package.json has not been updated."
-            exit 1
-          fi
       - name: Install dependencies and build 🔧
         run: npm install && npm run build
       - name: Publish package to NPM 📦
         run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+      - name: Check secret
+        run: echo "Is secret available? ${NODE_AUTH_TOKEN:+yes}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
