@@ -26,8 +26,8 @@ jobs:
         run: |
           set -x
           git fetch origin develop --verbose || echo "Fetch failed with exit code $?"
-          VERSION_CHANGED=$(git diff --name-only origin/develop..HEAD | grep 'package.json')
-          if [ "$VERSION_CHANGED" != "" ]; then
+          VERSION_CHANGED=$(git diff --name-only origin/develop..HEAD | grep 'package.json' || true)
+          if [ -n "$VERSION_CHANGED" ]; then
             echo "::set-output name=version_updated::true"
           else
             echo "::set-output name=version_updated::false"
