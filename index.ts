@@ -5,5 +5,3 @@ export const add = (a: number, b: number) => {
 export const remove = (a: number, b: number) => {
   return a - b
 }
-
-// Path: index.test.ts
