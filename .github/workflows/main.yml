@@ -11,16 +11,25 @@ jobs:
       contents: read # This is required for actions/checkout
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Generate GitHub App installation token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
 
       - name: Debug API call
         run: |
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          curl -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
           -H "Content-Type: application/json" \
           https://api.github.com/user
 
