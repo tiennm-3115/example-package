@@ -6,22 +6,19 @@ on:
 
 jobs:
   build:
-    permissions:
-      id-token: write # This is required for requesting the JWT
-      contents: read # This is required for actions/checkout
     runs-on: ubuntu-latest
     steps:
-      - name: Generate GitHub App installation token
-        id: generate_token
-        uses: tibdex/github-app-token@v1
+      - uses: actions/create-github-app-token@v1
+        id: app-token
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
 
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          token: ${{ steps.generate_token.outputs.token }}
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: false
 
       - uses: actions/setup-node@v3
         with:
@@ -29,7 +26,7 @@ jobs:
 
       - name: Debug API call
         run: |
-          curl -H "Authorization: token ${{ steps.generate_token.outputs.token }}" \
+          curl -H "Authorization: token ${{ steps.app-token.outputs.token }}" \
           -H "Content-Type: application/json" \
           https://api.github.com/user
 
