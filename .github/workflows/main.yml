@@ -13,5 +13,10 @@ jobs:
         with:
           node-version: 16.x
 
+      - name: Debug API call
+        run: |
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Content-Type: application/json" \
+
       - run: npm install --frozen-lockfile
       - run: npm run lint && npm run build
